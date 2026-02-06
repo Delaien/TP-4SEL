@@ -5,7 +5,7 @@ Projet d'automatisation de tests Selenium basé sur le sujet "TP 4SEL".
 ## Prérequis
 - Java 21
 - Maven
-- Chrome install�
+- Chrome installé
 
 ## Exécuter les tests
 
