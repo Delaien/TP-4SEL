@@ -5,6 +5,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class InventoryPage extends BasePage {
     private final By pageTitle = By.className("title");
@@ -26,6 +28,8 @@ public class InventoryPage extends BasePage {
 
     public InventoryPage addBackpackToCart() {
         click(addBackpackButton);
+        new WebDriverWait(driver, java.time.Duration.ofSeconds(10))
+                .until(ExpectedConditions.textToBePresentInElementLocated(cartBadge, "1"));
         return this;
     }
 
