@@ -20,11 +20,13 @@ public class CartPage extends BasePage {
     }
 
     public int getItemCount() {
+        waitUntilVisible(pageTitle);
         List<WebElement> items = driver.findElements(cartItems);
         return items.size();
     }
 
     public CheckoutPage clickCheckout() {
+        waitUntilVisible(pageTitle);
         click(checkoutButton);
         return new CheckoutPage(driver);
     }

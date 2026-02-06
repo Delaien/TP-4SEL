@@ -11,11 +11,17 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class InventoryPage extends BasePage {
     private final By pageTitle = By.className("title");
     private final By addBackpackButton = By.id("add-to-cart-sauce-labs-backpack");
+    private final By removeBackpackButton = By.id("remove-sauce-labs-backpack");
     private final By cartBadge = By.className("shopping_cart_badge");
     private final By cartIcon = By.className("shopping_cart_link");
 
     public InventoryPage(WebDriver driver) {
         super(driver);
+    }
+
+    public InventoryPage waitForPage() {
+        waitUntilVisible(pageTitle);
+        return this;
     }
 
     public boolean isDisplayed() {
@@ -29,7 +35,10 @@ public class InventoryPage extends BasePage {
     public InventoryPage addBackpackToCart() {
         click(addBackpackButton);
         new WebDriverWait(driver, java.time.Duration.ofSeconds(10))
-                .until(ExpectedConditions.textToBePresentInElementLocated(cartBadge, "1"));
+                .until(ExpectedConditions.or(
+                        ExpectedConditions.visibilityOfElementLocated(removeBackpackButton),
+                        ExpectedConditions.textToBePresentInElementLocated(cartBadge, "1")
+                ));
         return this;
     }
 
