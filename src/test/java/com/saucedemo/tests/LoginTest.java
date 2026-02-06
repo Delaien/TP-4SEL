@@ -20,7 +20,7 @@ public class LoginTest extends BaseTest {
     @Description("Login with standard_user should open inventory page")
     void testLoginWithValidCredentials() {
         LoginPage loginPage = new LoginPage(driver).open();
-        InventoryPage inventoryPage = loginPage.login("standard_user", "secret_sauce");
+        InventoryPage inventoryPage = loginPage.loginExpectSuccess("standard_user", "secret_sauce");
         assertTrue(inventoryPage.isDisplayed(), "Inventory page should be displayed");
     }
 
@@ -30,7 +30,7 @@ public class LoginTest extends BaseTest {
     @Description("Login with locked_out_user should show locked out error")
     void testLoginWithLockedUser() {
         LoginPage loginPage = new LoginPage(driver).open();
-        loginPage.login("locked_out_user", "secret_sauce");
+        loginPage.loginExpectFailure("locked_out_user", "secret_sauce");
         assertTrue(loginPage.isErrorDisplayed(), "Error message should be displayed");
         assertTrue(loginPage.getErrorMessage().toLowerCase().contains("locked out"));
     }
@@ -41,7 +41,7 @@ public class LoginTest extends BaseTest {
     @Description("Login with wrong password should show error")
     void testLoginWithInvalidPassword() {
         LoginPage loginPage = new LoginPage(driver).open();
-        loginPage.login("standard_user", "wrong_password");
+        loginPage.loginExpectFailure("standard_user", "wrong_password");
         assertTrue(loginPage.isErrorDisplayed(), "Error message should be displayed");
     }
 
@@ -51,7 +51,7 @@ public class LoginTest extends BaseTest {
     @Description("Login with empty fields should show error")
     void testLoginWithEmptyCredentials() {
         LoginPage loginPage = new LoginPage(driver).open();
-        loginPage.login("", "");
+        loginPage.loginExpectFailure("", "");
         assertTrue(loginPage.isErrorDisplayed(), "Error message should be displayed");
     }
 }

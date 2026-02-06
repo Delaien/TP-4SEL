@@ -17,7 +17,7 @@ public class InventoryTest extends BaseTest {
 
     private InventoryPage loginAsStandardUser() {
         LoginPage loginPage = new LoginPage(driver).open();
-        return loginPage.login("standard_user", "secret_sauce");
+        return loginPage.loginExpectSuccess("standard_user", "secret_sauce");
     }
 
     @Test

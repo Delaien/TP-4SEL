@@ -34,7 +34,7 @@ public class InventoryPage extends BasePage {
 
     public InventoryPage addBackpackToCart() {
         click(addBackpackButton);
-        new WebDriverWait(driver, java.time.Duration.ofSeconds(10))
+        new WebDriverWait(driver, java.time.Duration.ofSeconds(15))
                 .until(ExpectedConditions.or(
                         ExpectedConditions.visibilityOfElementLocated(removeBackpackButton),
                         ExpectedConditions.textToBePresentInElementLocated(cartBadge, "1")

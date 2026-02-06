@@ -24,7 +24,7 @@ public class CheckoutCompleteTest extends BaseTest {
     @Description("End-to-end order flow should complete and show confirmation")
     void testCompleteOrderFlow() {
         LoginPage loginPage = new LoginPage(driver).open();
-        InventoryPage inventoryPage = loginPage.login("standard_user", "secret_sauce");
+        InventoryPage inventoryPage = loginPage.loginExpectSuccess("standard_user", "secret_sauce");
         inventoryPage.addBackpackToCart();
         CartPage cartPage = inventoryPage.clickCartIcon();
         CheckoutPage checkoutPage = cartPage.clickCheckout();

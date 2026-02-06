@@ -24,7 +24,22 @@ public class LoginPage extends BasePage {
         type(usernameField, username);
         type(passwordField, password);
         click(loginButton);
+        return new InventoryPage(driver);
+    }
+
+    public InventoryPage loginExpectSuccess(String username, String password) {
+        type(usernameField, username);
+        type(passwordField, password);
+        click(loginButton);
         return new InventoryPage(driver).waitForPage();
+    }
+
+    public LoginPage loginExpectFailure(String username, String password) {
+        type(usernameField, username);
+        type(passwordField, password);
+        click(loginButton);
+        waitUntilVisible(errorMessage);
+        return this;
     }
 
     public String getErrorMessage() {
