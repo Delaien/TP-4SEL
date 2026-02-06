@@ -59,3 +59,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: target/allure-report
           publish_branch: gh-pages
+          force_orphan: true
