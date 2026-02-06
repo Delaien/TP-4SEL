@@ -4,6 +4,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.TimeoutException;
 
 public class InventoryPage extends BasePage {
     private final By pageTitle = By.className("title");
@@ -29,11 +30,16 @@ public class InventoryPage extends BasePage {
     }
 
     public int getCartItemCount() {
-        List<WebElement> badges = driver.findElements(cartBadge);
-        if (badges.isEmpty()) {
-            return 0;
+        try {
+            WebElement badge = waitUntilVisible(cartBadge);
+            return Integer.parseInt(badge.getText().trim());
+        } catch (TimeoutException e) {
+            List<WebElement> badges = driver.findElements(cartBadge);
+            if (badges.isEmpty()) {
+                return 0;
+            }
+            return Integer.parseInt(badges.get(0).getText().trim());
         }
-        return Integer.parseInt(badges.get(0).getText().trim());
     }
 
     public CartPage clickCartIcon() {
